@@ -17,8 +17,9 @@ echo ${DB_PWD:?err}
 # Be careful not to kill important connection such as things related to replication or aws rds management.
 # --wait-before-kill: give our node js logger the chance to retreive connection history before killing it.
 # But don't wait for too long since pt-kill will not move before killing process.
-pt-kill h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err} \
---match-user 'Worker|WebServer|Test.*' \
+pt-kill --host ${DB_HOST:?err} \
+--user ${DB_USER:?err} --password ${DB_PWD:?err} \
+--match-user 'Worker|WebServer' \
 --match-command Sleep --idle-time 60 \
 --victims all \
 --interval 5 \
@@ -28,7 +29,8 @@ pt-kill h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err} \
 --print --kill | node killedProcessLogger.js
 
 # Log deadlocks.
-pt-deadlock-logger h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err} \
+pt-deadlock-logger --host ${DB_HOST:?err} \
+--user ${DB_USER:?err} --password ${DB_PWD:?err} \
 --interval 5 \
 --dest D=${DB_NAME:?err},t=Deadlock
 
