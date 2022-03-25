@@ -50,7 +50,7 @@ reader.on('line', async (input) => {
         console.log(`   Getting process id[${processId}] sql history...`)
         const processHistory = await getProcessHistory(processId);
         await saveProcessHistory(processHistory);
-        console.log(processHistory);
+        console.log(`   Process id[${processId}] history saved`)
     } catch (error) {
         console.log(error);
     }
