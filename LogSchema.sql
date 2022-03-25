@@ -18,6 +18,50 @@ USE `Log`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Deadlock`
+--
+
+DROP TABLE IF EXISTS `Deadlock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Deadlock` (
+  `server` char(20) NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `thread` int unsigned NOT NULL,
+  `txn_id` bigint unsigned NOT NULL,
+  `txn_time` smallint unsigned NOT NULL,
+  `user` char(16) NOT NULL,
+  `hostname` char(20) NOT NULL,
+  `ip` char(15) NOT NULL,
+  `db` char(64) NOT NULL,
+  `tbl` char(64) NOT NULL,
+  `idx` char(64) NOT NULL,
+  `lock_type` char(16) NOT NULL,
+  `lock_mode` char(1) NOT NULL,
+  `wait_hold` char(1) NOT NULL,
+  `victim` tinyint unsigned NOT NULL,
+  `query` text NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`server`,`ts`,`thread`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ForeignKeyError`
+--
+
+DROP TABLE IF EXISTS `ForeignKeyError`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ForeignKeyError` (
+  `ts` datetime NOT NULL,
+  `error` text NOT NULL,
+  PRIMARY KEY (`ts`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `KilledProcess`
 --
 
@@ -42,7 +86,7 @@ CREATE TABLE `KilledProcess` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`kill_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +106,7 @@ CREATE TABLE `KilledProcessHistory` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`histroyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -74,4 +118,4 @@ CREATE TABLE `KilledProcessHistory` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-25 12:36:52
+-- Dump completed on 2022-03-25 18:25:28
