@@ -6,7 +6,7 @@ pt-kill --host ${DB_HOST:?err} \
 --match-command Sleep --match-user 'Test.*' --idle-time 30 \
 --victims all \
 --interval 5 \
---create-log-table --log-dsn 'D=Joker,t=percona_kill_log' \
+--create-log-table --log-dsn 'D=Log,t=KilledProcess' \
 --wait-before-kill 20 \
 --rds  \
 --print | node killLog.js
