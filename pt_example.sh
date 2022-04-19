@@ -1,11 +1,7 @@
 set -x
 # Need credentials to connect to db.
 # Note that this db user must have global PROCESS, EXECUTE privileges and some basic rights on information_schema & performance_schema.
-export DB_HOST='lom-snapshot-321.cqkuwpenkdlx.ap-east-1.rds.amazonaws.com'
-export DB_USER='DbSavior'
-export DB_PWD='Qwer!234'
-export DB_NAME='Log'
-export DB_TZ='Z'
+
 echo ${DB_HOST:?err}
 echo ${DB_USER:?err}
 echo ${DB_PWD:?err}
@@ -38,3 +34,16 @@ pt-deadlock-logger --host ${DB_HOST:?err} \
 pt-fk-error-logger h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err} \
 --interval 5 \
 --dest D=${DB_NAME:?err},t=ForeignKeyError
+
+
+pt-archiver \
+--source h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err},A=utf8mb4,D=Joker,t=RankRecord \
+--dest h=${DB_HOST:?err},u=${DB_USER:?err},p=${DB_PWD:?err},A=utf8mb4,D=JokerArchive,t=RankRecord \
+--where "create_time < DATE('2022-04-13 10:56:20') - INTERVAL 28 DAY" \
+--bulk-delete --bulk-insert --commit-each --limit 1000 \
+--why-quit \
+--statistics \
+--progress 1000 \
+--no-delete
+
+
