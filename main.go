@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"regexp"
+	"strconv"
 	"sync"
 
 	"github.com/joho/godotenv"
@@ -24,24 +27,51 @@ func killProcessJob() {
 		"--host", os.Getenv("DB_HOST"),
 		"--user", os.Getenv("DB_USER"),
 		"--password", os.Getenv("DB_PWD"),
-		"--match-user", "Worker|WebServer",
+		"--match-user", ".*",
 		"--match-command", "Sleep",
-		"--idle-time", "60",
+		"--idle-time", "10",
 		"--victims", "all",
 		"--log-dsn", fmt.Sprintf("D=%v,t=KilledProcess", os.Getenv("DB_SCHEMA")),
-		"--iteration", "1",
+		"--interval", "5",
 		"--rds",
 		"--wait-before-kill", "5",
 		"--print",
 		// "--kill",
 	)
-	out, err := cmd.CombinedOutput()
-	log.Println(string(out))
+	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Printf("cmd.Run() failed with %s\n", err)
+		log.Println(err)
 	}
 
-	log.Println("killProcessJob done")
+	if err := cmd.Start(); err != nil {
+		log.Println(err)
+		return
+	}
+
+	pattern, _ := regexp.Compile("KILL ([0-9]+)")
+	scanner := bufio.NewScanner(stdout)
+	for scanner.Scan() {
+		line := scanner.Text()
+		log.Printf("Receive: %v", line)
+		matches := pattern.FindStringSubmatch(line)
+		if len(matches) < 2 {
+			log.Printf("Cannot find process id from pt-kill log: %v", line)
+			continue
+		}
+
+		processId, err := strconv.Atoi(matches[1])
+		if err != nil {
+			log.Printf("Cannot convert %v to int err: %v", matches[1], err)
+			continue
+		}
+
+		log.Printf("Parsed: %v", processId)
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+	}
+
+	log.Println("killProcessJob escape")
 }
 
 func deadlockLoggerJob() {
@@ -86,9 +116,10 @@ func main() {
 	}
 
 	job := cron.New()
-	// job.AddFunc("@every 5s", deadlockLoggerJob)
+	job.AddFunc("@every 5s", deadlockLoggerJob)
 	// job.AddFunc("@every 5s", fkErrorLoggerJob)
-	job.AddFunc("@every 5s", killProcessJob)
 	job.Start()
+
+	go killProcessJob()
 	forever()
 }
