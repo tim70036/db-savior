@@ -14,7 +14,6 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 )
@@ -45,14 +44,14 @@ func killProcessJob() {
 		"--password", os.Getenv("DB_PWD"),
 		"--match-user", "Worker|WebServer",
 		"--match-command", "Sleep",
-		"--idle-time", "10",
+		"--idle-time", "60",
 		"--victims", "all",
 		"--log-dsn", fmt.Sprintf("D=%v,t=KilledProcess", os.Getenv("DB_NAME")),
 		"--interval", "5",
 		"--rds",
 		"--wait-before-kill", "5",
 		"--print",
-		// "--kill",
+		"--kill",
 	)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -81,7 +80,7 @@ func killProcessJob() {
 			continue
 		}
 
-		log.Printf("Parsed: %v", processId)
+		log.Printf("Retreiving processId[%v] sql history...", processId)
 		queryStr := `
 			SELECT ps.id, COALESCE(ps.user, ''), COALESCE(ps.host, ''), COALESCE(ps.db, ''), COALESCE(esh.sql_text, '')
 			FROM information_schema.processlist AS ps
@@ -125,6 +124,7 @@ func killProcessJob() {
 			log.Printf("Query %v failed err: %v", queryStr, err)
 			continue
 		}
+		log.Printf("History of processId[%v] saved", processId)
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
@@ -198,7 +198,7 @@ func main() {
 
 	job := cron.New()
 	job.AddFunc("@every 5s", deadlockLoggerJob)
-	// job.AddFunc("@every 5s", fkErrorLoggerJob)
+	job.AddFunc("@every 5s", fkErrorLoggerJob)
 	job.Start()
 
 	go killProcessJob()
