@@ -11,6 +11,8 @@ import (
 
 var db *sql.DB
 
+// initDatabase opens a connection pool to database with the preset configuration.
+// There will be a package level variable db that represent the connection pool for other function to use.
 func initDatabase() {
 	if err := godotenv.Load(); err != nil && !os.IsNotExist(err) {
 		panic(err)

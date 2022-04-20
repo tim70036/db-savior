@@ -7,6 +7,7 @@ import (
 	"os/exec"
 )
 
+// logDeadlock Runs pt-deadlock-logger for once to retreive database dump and save result to database.
 func logDeadlock() {
 	log.Println("deadlockLoggerJob start")
 
@@ -29,6 +30,7 @@ func logDeadlock() {
 	log.Println("deadlockLoggerJob done")
 }
 
+// logFkError Runs pt-fk-error-logger for once to retreive database dump and save result to database.
 func logFkError() {
 	log.Println("fkErrorLoggerJob start")
 

@@ -19,6 +19,12 @@ type ProcessSummary struct {
 	SqlHistory []string
 }
 
+// idleProcessKiller utilizes pt-kill.
+// It's a non ending function that tries to find connection that is established by matched users.
+// You should run it as goroutine.
+// Matched users are determined by userRegex.
+// If pt-kill find these connections are in Sleep state for over idleTime seconds, the connection will be killed.
+// Before killing a connection, its history will be saved into database for futher investigation.
 func idleProcessKiller(userRegex string, idleTime uint) {
 	log.Println("killProcessJob start")
 

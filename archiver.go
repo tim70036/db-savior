@@ -8,6 +8,9 @@ import (
 	"time"
 )
 
+// archiveStaleData runs pt-archive with bulk insert/delete enabled.
+// It will archive data in sourceTable that is older than (now - daysBefore).
+// Data is archived to destTable.
 func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTable string, daysBefore uint) {
 	log.Println("archiveJob start")
 
