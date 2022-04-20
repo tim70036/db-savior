@@ -1,9 +1,11 @@
 package main
 
 import (
+	"os"
 	"sync"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 )
 
@@ -14,14 +16,18 @@ func forever() {
 }
 
 func main() {
+	if err := godotenv.Load(); err != nil && !os.IsNotExist(err) {
+		panic(err)
+	}
+
 	initDatabase()
 	defer db.Close()
 
 	go idleProcessKiller("Worker|WebServer", 60)
 
 	job := cron.New(cron.WithLocation(time.UTC))
-	job.AddFunc("@every 5s", logDeadlock)
-	job.AddFunc("@every 5s", logFkError)
+	// job.AddFunc("@every 5s", logDeadlock)
+	// job.AddFunc("@every 5s", logFkError)
 	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "RankRecord", "JokerArchive", "RankRecord", 30) })
 	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "CashRecord", "JokerArchive", "CashRecord", 30) })
 	job.Start()
