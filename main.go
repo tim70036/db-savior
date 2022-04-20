@@ -3,8 +3,10 @@ package main
 import (
 	"os"
 	"sync"
+	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/robfig/cron/v3"
 )
 
 func forever() {
@@ -18,13 +20,13 @@ func main() {
 		panic(err)
 	}
 
-	go archiveJob()
+	go idleProcessKiller("Worker|WebServer", 60)
 
-	// job := cron.New()
-	// job.AddFunc("@every 5s", deadlockLoggerJob)
-	// job.AddFunc("@every 5s", fkErrorLoggerJob)
-	// job.Start()
+	job := cron.New(cron.WithLocation(time.UTC))
+	job.AddFunc("@every 5s", logDeadlock)
+	job.AddFunc("@every 5s", logFkError)
+	job.AddFunc("0 0 0 * * *", func() { archiveStaleData("Joker", "RankRecord", "JokerArchive", "RankRecord", 30) })
+	job.Start()
 
-	// go killProcessJob()
 	forever()
 }

@@ -8,16 +8,10 @@ import (
 	"time"
 )
 
-func archiveJob() {
+func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTable string, daysBefore uint) {
 	log.Println("archiveJob start")
 
-	// TODO: func args
-	sourceDb, sourceTable := "Joker", "RankRecord"
-	destDb, destTable := "JokerArchive", "RankRecord"
-
-	// TODO: const
 	now := time.Now().UTC().Format(time.RFC3339)
-	daysBefore := "30" // func args?
 	condition := fmt.Sprintf("create_time < DATE('%v') - INTERVAL %v DAY", now, daysBefore)
 	batchSize := "1000"
 

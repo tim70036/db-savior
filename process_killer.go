@@ -23,7 +23,7 @@ type ProcessSummary struct {
 	SqlHistory []string
 }
 
-func killProcessJob() {
+func idleProcessKiller(userRegex string, idleTime uint) {
 	log.Println("killProcessJob start")
 
 	db := createDbConnection()
@@ -33,9 +33,9 @@ func killProcessJob() {
 		"--host", os.Getenv("DB_HOST"),
 		"--user", os.Getenv("DB_USER"),
 		"--password", os.Getenv("DB_PWD"),
-		"--match-user", "Worker|WebServer",
+		"--match-user", userRegex,
 		"--match-command", "Sleep",
-		"--idle-time", "60",
+		"--idle-time", strconv.FormatUint(uint64(idleTime), 10),
 		"--victims", "all",
 		"--log-dsn", fmt.Sprintf("D=%v,t=KilledProcess", os.Getenv("DB_NAME")),
 		"--interval", "5",

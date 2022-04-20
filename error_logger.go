@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-func deadlockLoggerJob() {
+func logDeadlock() {
 	log.Println("deadlockLoggerJob start")
 
 	cmd := exec.Command("pt-deadlock-logger",
@@ -28,7 +28,7 @@ func deadlockLoggerJob() {
 	log.Println("deadlockLoggerJob done")
 }
 
-func fkErrorLoggerJob() {
+func logFkError() {
 	log.Println("fkErrorLoggerJob start")
 
 	cmd := exec.Command("pt-fk-error-logger",
