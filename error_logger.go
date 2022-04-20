@@ -16,6 +16,7 @@ func logDeadlock() {
 		"--password", os.Getenv("DB_PWD"),
 		"--dest", fmt.Sprintf("D=%v,t=Deadlock", os.Getenv("DB_NAME")),
 		"--iteration", "1",
+		"--noversion-check",
 	)
 
 	cmd.Stdout = os.Stdout
@@ -35,6 +36,7 @@ func logFkError() {
 		fmt.Sprintf("h=%v,u=%v,p=%v", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PWD")),
 		"--dest", fmt.Sprintf("D=%v,t=ForeignKeyError", os.Getenv("DB_NAME")),
 		"--iteration", "1",
+		"--noversion-check",
 	)
 
 	cmd.Stdout = os.Stdout

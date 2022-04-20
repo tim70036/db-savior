@@ -30,6 +30,7 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 		"--why-quit",
 		"--statistics",
 		"--no-delete",
+		"--noversion-check",
 	)
 
 	cmd.Stdout = os.Stdout
