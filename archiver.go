@@ -15,7 +15,7 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 	log.Println("archiveJob start")
 
 	now := time.Now().UTC().Format(time.RFC3339)
-	condition := fmt.Sprintf("create_time < DATE('%v') - INTERVAL %v DAY", now, daysBefore)
+	condition := fmt.Sprintf("create_time < '%v' - INTERVAL %v DAY", now, daysBefore)
 	batchSize := "1000"
 
 	log.Printf("sourceDb[%v] sourceTable[%v]", sourceDb, sourceTable)
@@ -29,7 +29,7 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 		"--where", condition,
 		"--bulk-delete", "--bulk-insert", "--commit-each",
 		"--limit", batchSize,
-		"--progress", batchSize,
+		// "--progress", batchSize,
 		"--why-quit",
 		"--statistics",
 		"--no-delete",
