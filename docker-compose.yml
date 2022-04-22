@@ -1,0 +1,9 @@
+services:
+  db-savior:
+    build: .
+    environment:
+      DB_HOST: ${DB_HOST:?err}
+      DB_USER: ${DB_USER:?err}
+      DB_PWD: ${DB_PWD:?err}
+      DB_NAME: ${DB_NAME:?err}
+    restart: unless-stopped

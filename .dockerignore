@@ -16,3 +16,5 @@ docker-compose.yml
 Gemfile
 Gemfile.lock
 _website*.json
+
+.env

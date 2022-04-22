@@ -1,11 +1,9 @@
 package main
 
 import (
-	"os"
 	"sync"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 )
 
@@ -16,10 +14,6 @@ func forever() {
 }
 
 func main() {
-	if err := godotenv.Load(); err != nil && !os.IsNotExist(err) {
-		panic(err)
-	}
-
 	initDatabase()
 	defer db.Close()
 
