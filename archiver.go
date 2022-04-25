@@ -18,10 +18,7 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 	condition := fmt.Sprintf("create_time < '%v' - INTERVAL %v DAY", now, daysBefore)
 	batchSize := "1000"
 
-	log.Printf("sourceDb[%v] sourceTable[%v]", sourceDb, sourceTable)
-	log.Printf("destDb[%v] destTable[%v]", destDb, destTable)
-	log.Printf("condition[%v]", condition)
-	log.Printf("batchSize[%v]", batchSize)
+	log.Printf("source[%v.%v], dest[%v.%v] condition[%v] batchSize[%v]", sourceDb, sourceTable, destDb, destTable, condition, batchSize)
 
 	cmd := exec.Command("pt-archiver",
 		"--source", fmt.Sprintf("h=%v,u=%v,p=%v,A=utf8mb4,D=%v,t=%v", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PWD"), sourceDb, sourceTable),
@@ -29,11 +26,11 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 		"--where", condition,
 		"--bulk-delete", "--bulk-insert", "--commit-each",
 		"--limit", batchSize,
-		// "--progress", batchSize,
 		"--why-quit",
 		"--statistics",
-		"--no-delete",
 		"--noversion-check",
+		// "--progress", batchSize,
+		// "--no-delete",
 	)
 
 	cmd.Stdout = os.Stdout

@@ -24,6 +24,7 @@ func main() {
 	// job.AddFunc("@every 5s", logFkError)
 	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "RankRecord", "JokerArchive", "RankRecord", 30) })
 	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "CashRecord", "JokerArchive", "CashRecord", 30) })
+
 	job.Start()
 
 	forever()
