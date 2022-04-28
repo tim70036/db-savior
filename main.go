@@ -13,6 +13,13 @@ func forever() {
 	wg.Wait()
 }
 
+type ArchiveConfig []struct {
+	srcSchema  string
+	srcTable   string
+	destSchema string
+	destTable  string
+}
+
 func main() {
 	initDatabase()
 	defer db.Close()
@@ -22,8 +29,48 @@ func main() {
 	job := cron.New(cron.WithLocation(time.UTC))
 	// job.AddFunc("@every 5s", logDeadlock)
 	// job.AddFunc("@every 5s", logFkError)
-	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "RankRecord", "JokerArchive", "RankRecord", 30) })
-	job.AddFunc("0 0 * * *", func() { archiveStaleData("Joker", "CashRecord", "JokerArchive", "CashRecord", 30) })
+
+	var configs ArchiveConfig = ArchiveConfig{
+		{"Joker", "CashScoreBoard", "JokerArchive", "CashScoreBoard"},
+		{"Joker", "ExpScoreBoard", "JokerArchive", "ExpScoreBoard"},
+		{"Joker", "RankScoreBoard", "JokerArchive", "RankScoreBoard"},
+		{"Joker", "RichManScoreBoard", "JokerArchive", "RichManScoreBoard"},
+		{"Joker", "WinRateScoreBoard", "JokerArchive", "WinRateScoreBoard"},
+
+		{"Joker", "CashRecord", "JokerArchive", "CashRecord"},
+		{"Joker", "RankRecord", "JokerArchive", "RankRecord"},
+		{"Joker", "ExpRecord", "JokerArchive", "ExpRecord"},
+		{"Joker", "GoldRecord", "JokerArchive", "GoldRecord"},
+		{"Joker", "TicketRecord", "JokerArchive", "TicketRecord"},
+		{"Joker", "TransactionRecord", "JokerArchive", "TransactionRecord"},
+
+		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
+		{"Joker", "ClubMahjongGame", "JokerArchive", "ClubMahjongGame"},
+		{"Joker", "BuddyMahjongGame", "JokerArchive", "BuddyMahjongGame"},
+		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
+		{"Joker", "CommonMahjongGame", "JokerArchive", "CommonMahjongGame"},
+		{"Joker", "RankMahjongGame", "JokerArchive", "RankMahjongGame"},
+		{"Joker", "MissionGame", "JokerArchive", "MissionGame"},
+
+		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
+		{"Joker", "MahjongRoundRecord", "JokerArchive", "MahjongRoundRecord"},
+	}
+
+	// archiveTimeSpec := "0 9 * * *"
+	var archiveDaysBefore uint = 30
+	for _, config := range configs {
+		srcSchema, srcTable := config.srcSchema, config.srcTable
+		destSchema, destTable := config.destSchema, config.destTable
+		archiveStaleData(srcSchema, srcTable, destSchema, destTable, archiveDaysBefore)
+	}
+
+	// job.AddFunc(archiveTimeSpec, func() {
+	// 	for _, config := range configs {
+	// 		srcSchema, srcTable := config.srcSchema, config.srcTable
+	// 		destSchema, destTable := config.destSchema, config.destTable
+	// 		archiveStaleData(srcSchema, srcTable, destSchema, destTable, archiveDaysBefore)
+	// 	}
+	// })
 
 	job.Start()
 
