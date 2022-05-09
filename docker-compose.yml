@@ -6,4 +6,7 @@ services:
       DB_USER: ${DB_USER:?err}
       DB_PWD: ${DB_PWD:?err}
       DB_NAME: ${DB_NAME:?err}
+      DB_HOST_ARCHIVE: ${DB_HOST_ARCHIVE:?err}
+      DB_USER_ARCHIVE: ${DB_USER_ARCHIVE:?err}
+      DB_PWD_ARCHIVE: ${DB_PWD_ARCHIVE:?err}
     restart: unless-stopped

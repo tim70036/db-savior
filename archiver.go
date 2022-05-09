@@ -20,7 +20,7 @@ func archiveStaleData(sourceDb string, sourceTable string, destDb string, destTa
 
 	cmd := exec.Command("pt-archiver",
 		"--source", fmt.Sprintf("h=%v,u=%v,p=%v,A=utf8mb4,D=%v,t=%v", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PWD"), sourceDb, sourceTable),
-		"--dest", fmt.Sprintf("h=%v,u=%v,p=%v,A=utf8mb4,D=%v,t=%v", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PWD"), destDb, destTable),
+		"--dest", fmt.Sprintf("h=%v,u=%v,p=%v,A=utf8mb4,D=%v,t=%v", os.Getenv("DB_HOST_ARCHIVE"), os.Getenv("DB_USER_ARCHIVE"), os.Getenv("DB_PWD_ARCHIVE"), destDb, destTable),
 		"--where", condition,
 		"--bulk-delete", "--bulk-insert", "--commit-each",
 		"--limit", batchSize,

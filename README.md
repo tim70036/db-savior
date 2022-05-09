@@ -17,12 +17,16 @@ First, ensure that you are using a machine meeting the following requirements:
 1. Create schema and tables
 - Create a log schema that will store some logs from this tool. See `LogSchema.sql`.
 - Create destination tables that will save old data from archived table. Normally, you should copy the data structure of the archived table. The column type should all be the same. However, you can ignore foreign key and index. (You should probably do so) See `JokerArchiveSchema.sql` for example.
-2. Set database credential in the file `.env`. This file is read by docker compose, using the following format:
+2. Set database credential in the file `.env`. There should be 2 database. The first one is the database that db-savior will operate on. The second one is specifically for archive process. Old data will be moved from the first db to the second one. This file is read by docker compose, using the following format:
     ```
-    DB_HOST="mydatabase.com"
+    DB_HOST="my-database.com"
     DB_USER="MyUser"
     DB_PWD="12345678"
     DB_NAME="Log"
+
+    DB_HOST_ARCHIVE="my-archived-database.com"
+    DB_USER_ARCHIVE="MyUser"
+    DB_PWD_ARCHIVE="12345678"
     ```
 3. The database user will need some permissions:
 - Global privilage `PROCESS`, `EXECUTE` to kill connection
