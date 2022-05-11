@@ -47,3 +47,5 @@ pt-archiver \
 --no-delete
 
 
+sudo du -h $(docker inspect --format='{{.LogPath}}' $(docker ps -qa))
+docker inspect $(docker ps -qa)

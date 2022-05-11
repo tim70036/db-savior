@@ -10,3 +10,9 @@ services:
       DB_USER_ARCHIVE: ${DB_USER_ARCHIVE:?err}
       DB_PWD_ARCHIVE: ${DB_PWD_ARCHIVE:?err}
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+        compress: 'true'
