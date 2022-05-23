@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -75,32 +76,21 @@ func idleProcessKiller(userRegex string, idleTime uint) {
 				continue
 			}
 
-			log.Printf("Retreiving processId[%v] sql history...", processId)
-			summary, err := retreiveSummary(processId)
-			if err != nil {
-				log.Printf("Cannot retreive summary of processId[%v] err: %v", processId, err)
-				continue
-			}
-			log.Println(summary)
-
-			err = saveSummary(summary)
-			if err != nil {
-				log.Printf("Cannot save summary of processId[%v] err: %v", processId, err)
-				continue
-			}
-			log.Printf("History of processId[%v] saved", processId)
+			go processSummary(processId)
 		}
 		if err := scanner.Err(); err != nil {
 			fmt.Fprintln(os.Stderr, "Scanne error:", err)
 		}
 
 		const sleepSeconds = 5
-		log.Printf("killProcessJob escape restart in %v seconds...", sleepSeconds)
+		log.Printf("killProcessJob escaped, restart in %v seconds...", sleepSeconds)
 		time.Sleep(sleepSeconds * time.Second)
 	}
 }
 
-func retreiveSummary(processId int) (*ProcessSummary, error) {
+func processSummary(processId int) {
+	log.Printf("Retreiving processId[%v] sql history...", processId)
+
 	queryStr := `
 		SELECT ps.id, COALESCE(ps.user, ''), COALESCE(ps.host, ''), COALESCE(ps.db, ''), COALESCE(esh.sql_text, '')
 		FROM information_schema.processlist AS ps
@@ -109,11 +99,16 @@ func retreiveSummary(processId int) (*ProcessSummary, error) {
 		WHERE ps.id=?
 		ORDER BY esh.EVENT_ID
 	`
-	results, err := db.Query(queryStr, processId)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	results, err := db.QueryContext(ctx, queryStr, processId)
 	if err != nil {
 		log.Printf("Query %v failed err: %v", queryStr, err)
-		return nil, err
+		return
 	}
+	defer results.Close()
 
 	var summary ProcessSummary
 	for results.Next() {
@@ -125,11 +120,10 @@ func retreiveSummary(processId int) (*ProcessSummary, error) {
 		}
 		summary.SqlHistory = append(summary.SqlHistory, sqlText)
 	}
-	return &summary, nil
-}
 
-func saveSummary(summary *ProcessSummary) error {
-	queryStr := `
+	log.Println(summary)
+
+	queryStr = `
 		INSERT INTO KilledProcessHistory (processId, user, host, db, sqlHistory)
 		VALUES (?, ?, ?, ?, ?)
 	`
@@ -137,13 +131,14 @@ func saveSummary(summary *ProcessSummary) error {
 	jsonSqlHistory, err := json.Marshal(summary.SqlHistory)
 	if err != nil {
 		log.Printf("Fail to encode %v to JSON err: %v", summary.SqlHistory, err)
-		return err
+		return
 	}
 
-	_, err = db.Query(queryStr, summary.ProcessId, summary.User, summary.Host, summary.Db, jsonSqlHistory)
+	_, err = db.QueryContext(ctx, queryStr, summary.ProcessId, summary.User, summary.Host, summary.Db, jsonSqlHistory)
 	if err != nil {
 		log.Printf("Query %v failed err: %v", queryStr, err)
-		return err
+		return
 	}
-	return nil
+
+	log.Printf("Summary of processId[%v] saved", processId)
 }
