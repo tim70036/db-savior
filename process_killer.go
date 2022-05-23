@@ -43,6 +43,7 @@ func idleProcessKiller(userRegex string, idleTime uint) {
 			"--wait-before-kill", "5",
 			"--print",
 			"--kill",
+			"--verbose",
 			"--noversion-check",
 		)
 
@@ -55,17 +56,16 @@ func idleProcessKiller(userRegex string, idleTime uint) {
 
 		if err := cmd.Start(); err != nil {
 			log.Println(err)
-			return
 		}
 
 		pattern, _ := regexp.Compile("KILL ([0-9]+)")
 		scanner := bufio.NewScanner(stdout)
 		for scanner.Scan() {
 			line := scanner.Text()
-			log.Printf("Receive: %v", line)
+			log.Printf("pt-kill: %v", line)
+
 			matches := pattern.FindStringSubmatch(line)
 			if len(matches) < 2 {
-				log.Printf("Cannot find process id from pt-kill log: %v", line)
 				continue
 			}
 
