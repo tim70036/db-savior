@@ -32,6 +32,8 @@ func initDatabase() {
 	log.Printf("Connected to db host[%v] user[%v] dbName[%v]", config.Addr, config.User, config.DBName)
 
 	db.SetConnMaxLifetime(time.Minute * 3)
+	db.SetConnMaxIdleTime(time.Minute * 3)
 	db.SetMaxOpenConns(5)
 	db.SetMaxIdleConns(5)
+	// log.Printf("%+v", db)
 }
