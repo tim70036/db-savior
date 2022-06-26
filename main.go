@@ -54,6 +54,20 @@ func main() {
 
 		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
 		{"Joker", "MahjongRoundRecord", "JokerArchive", "MahjongRoundRecord"},
+
+		{"Joker", "BuddyYablonBet", "JokerArchive", "BuddyYablonBet"},
+		{"Joker", "CommonYablonBet", "JokerArchive", "CommonYablonBet"},
+		{"Joker", "ClubYablonBet", "JokerArchive", "ClubYablonBet"},
+
+		{"Joker", "BuddyYablonGame", "JokerArchive", "BuddyYablonGame"},
+		{"Joker", "CommonYablonGame", "JokerArchive", "CommonYablonGame"},
+		{"Joker", "ClubYablonGame", "JokerArchive", "ClubYablonGame"},
+
+		{"Joker", "RouletteTransferInRecord", "JokerArchive", "RouletteTransferInRecord"},
+		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},
+
+		{"Joker", "OnlineRecord", "JokerArchive", "OnlineRecord"},
+		{"Joker", "ClubOperateLog", "JokerArchive", "ClubOperateLog"},
 	}
 
 	archiveTimeSpec := "0 0 * * *"

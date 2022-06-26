@@ -37,7 +37,7 @@ First, ensure that you are using a machine meeting the following requirements:
 - Decide what kind of connection will be killed
 - Determine how often should the tool log fk and deadlock error
 
-Finally, run `docker-compose up` to run the tool.
+Finally, run `docker-compose build` and `docker-compose up -d` to run the tool.
 
 ## Cautions
 ### Database Migration

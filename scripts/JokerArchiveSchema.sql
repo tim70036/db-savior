@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `JokerArchive` /*!40100 DEFAULT CHARACTER SET utf
 USE `JokerArchive`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: lom-snapshot-0329.cqkuwpenkdlx.ap-east-1.rds.amazonaws.com    Database: JokerArchive
+-- Host: lom-archive.cqkuwpenkdlx.ap-east-1.rds.amazonaws.com    Database: JokerArchive
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,6 +45,48 @@ CREATE TABLE `BuddyMahjongGame` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `BuddyYablonBet`
+--
+
+DROP TABLE IF EXISTS `BuddyYablonBet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `BuddyYablonBet` (
+  `betId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `uid` char(36) NOT NULL,
+  `profit` int NOT NULL,
+  `water` int NOT NULL,
+  `cards` varchar(255) NOT NULL,
+  `payPool` int NOT NULL,
+  `betAmount` int NOT NULL,
+  `gameId` char(36) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`betId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `BuddyYablonGame`
+--
+
+DROP TABLE IF EXISTS `BuddyYablonGame`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `BuddyYablonGame` (
+  `gameId` char(36) NOT NULL,
+  `roomId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `endTime` datetime NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `gameSetting` text NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `CashRecord`
 --
 
@@ -62,7 +104,7 @@ CREATE TABLE `CashRecord` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cashRecordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10226933 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14478669 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +121,7 @@ CREATE TABLE `CashScoreBoard` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cashScoreBoardId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +187,71 @@ CREATE TABLE `ClubMahjongGame` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `ClubOperateLog`
+--
+
+DROP TABLE IF EXISTS `ClubOperateLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ClubOperateLog` (
+  `operationId` int unsigned NOT NULL AUTO_INCREMENT,
+  `operatorMemberId` varchar(255) NOT NULL,
+  `targetMemberId` varchar(255) NOT NULL,
+  `operateLogType` int NOT NULL,
+  `describtion` text NOT NULL,
+  `createTime` datetime NOT NULL DEFAULT '3000-01-01 00:00:00',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`operationId`)
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ClubYablonBet`
+--
+
+DROP TABLE IF EXISTS `ClubYablonBet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ClubYablonBet` (
+  `betId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `uid` char(36) NOT NULL,
+  `profit` int NOT NULL,
+  `water` int NOT NULL,
+  `cards` varchar(255) NOT NULL,
+  `payPool` int NOT NULL,
+  `betAmount` int NOT NULL,
+  `gameId` char(36) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`betId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ClubYablonGame`
+--
+
+DROP TABLE IF EXISTS `ClubYablonGame`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ClubYablonGame` (
+  `gameId` char(36) NOT NULL,
+  `roomId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `endTime` datetime NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `gameSetting` text NOT NULL,
+  `clubId` char(36) NOT NULL,
+  `gameMetaUid` char(36) NOT NULL,
+  `waterPct` int NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `CommonDualMahjongGame`
 --
 
@@ -201,6 +308,48 @@ CREATE TABLE `CommonMahjongGame` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `CommonYablonBet`
+--
+
+DROP TABLE IF EXISTS `CommonYablonBet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CommonYablonBet` (
+  `betId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `uid` char(36) NOT NULL,
+  `profit` int NOT NULL,
+  `water` int NOT NULL,
+  `cards` varchar(255) NOT NULL,
+  `payPool` int NOT NULL,
+  `betAmount` int NOT NULL,
+  `gameId` char(36) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`betId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `CommonYablonGame`
+--
+
+DROP TABLE IF EXISTS `CommonYablonGame`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CommonYablonGame` (
+  `gameId` char(36) NOT NULL,
+  `roomId` char(36) NOT NULL,
+  `state` int unsigned NOT NULL,
+  `endTime` datetime NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `gameSetting` text NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `DualMahjongRoundRecord`
 --
 
@@ -238,7 +387,7 @@ CREATE TABLE `ExpRecord` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`expRecordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2152725 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2957255 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +404,7 @@ CREATE TABLE `ExpScoreBoard` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`expScoreBoardId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +426,7 @@ CREATE TABLE `GoldRecord` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `gameType` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`goldRecordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7174163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12665674 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,6 +464,24 @@ CREATE TABLE `MissionGame` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OnlineRecord`
+--
+
+DROP TABLE IF EXISTS `OnlineRecord`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `OnlineRecord` (
+  `recordId` int unsigned NOT NULL AUTO_INCREMENT,
+  `record` mediumtext NOT NULL,
+  `startTime` datetime NOT NULL,
+  `endTime` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`recordId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +550,7 @@ CREATE TABLE `RankScoreBoard` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`rankScoreBoardId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -400,7 +567,45 @@ CREATE TABLE `RichManScoreBoard` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`richManScoreBoardId`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `RouletteTransferInRecord`
+--
+
+DROP TABLE IF EXISTS `RouletteTransferInRecord`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `RouletteTransferInRecord` (
+  `transferId` int unsigned NOT NULL AUTO_INCREMENT,
+  `type` int unsigned NOT NULL,
+  `rouletteId` char(36) NOT NULL,
+  `amount` int NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`transferId`)
+) ENGINE=InnoDB AUTO_INCREMENT=644 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `RouletteTransferOutRecord`
+--
+
+DROP TABLE IF EXISTS `RouletteTransferOutRecord`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `RouletteTransferOutRecord` (
+  `transferId` int unsigned NOT NULL AUTO_INCREMENT,
+  `type` int unsigned NOT NULL,
+  `prizeType` int unsigned NOT NULL,
+  `rouletteId` char(36) NOT NULL,
+  `amount` int NOT NULL,
+  `uid` char(36) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`transferId`)
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -413,14 +618,14 @@ DROP TABLE IF EXISTS `TicketRecord`;
 CREATE TABLE `TicketRecord` (
   `ticketRecordId` int NOT NULL AUTO_INCREMENT,
   `memberId` varchar(45) NOT NULL,
-  `beforeTicket` int NOT NULL DEFAULT '0',
-  `amount` int NOT NULL DEFAULT '0',
+  `beforeTicket` decimal(10,2) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
   `createTime` datetime NOT NULL DEFAULT '3000-01-01 00:00:00',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `gameType` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`ticketRecordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=497869 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=712539 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,7 +641,7 @@ CREATE TABLE `TransactionRecord` (
   `toMemberId` varchar(45) NOT NULL,
   `transactionType` int NOT NULL,
   `gold` int NOT NULL,
-  `ticket` int NOT NULL,
+  `ticket` decimal(10,2) NOT NULL,
   `status` int NOT NULL,
   `createTime` datetime NOT NULL DEFAULT '3000-01-01 00:00:00',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -471,4 +676,4 @@ CREATE TABLE `WinRateScoreBoard` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-26 13:53:53
+-- Dump completed on 2022-06-26 19:01:34
