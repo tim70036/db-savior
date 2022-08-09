@@ -36,6 +36,7 @@ func main() {
 		{"Joker", "RankScoreBoard", "JokerArchive", "RankScoreBoard"},
 		{"Joker", "RichManScoreBoard", "JokerArchive", "RichManScoreBoard"},
 		{"Joker", "WinRateScoreBoard", "JokerArchive", "WinRateScoreBoard"},
+		{"Joker", "ClubCashScoreboard", "JokerArchive", "ClubCashScoreboard"},
 
 		{"Joker", "CashRecord", "JokerArchive", "CashRecord"},
 		{"Joker", "RankRecord", "JokerArchive", "RankRecord"},
@@ -43,6 +44,9 @@ func main() {
 		{"Joker", "GoldRecord", "JokerArchive", "GoldRecord"},
 		{"Joker", "TicketRecord", "JokerArchive", "TicketRecord"},
 		{"Joker", "TransactionRecord", "JokerArchive", "TransactionRecord"},
+		{"Joker", "MarbleRecord", "JokerArchive", "MarbleRecord"},
+		{"Joker", "ItemPurchaseRecord", "JokerArchive", "ItemPurchaseRecord"},
+		{"Joker", "BundlePurchaseRecord", "JokerArchive", "BundlePurchaseRecord"},
 
 		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
 		{"Joker", "ClubMahjongGame", "JokerArchive", "ClubMahjongGame"},
@@ -63,21 +67,29 @@ func main() {
 		{"Joker", "CommonYablonGame", "JokerArchive", "CommonYablonGame"},
 		{"Joker", "ClubYablonGame", "JokerArchive", "ClubYablonGame"},
 
+		{"Joker", "CommonChinesePokerRoundRecord", "JokerArchive", "CommonChinesePokerRoundRecord"},
+		{"Joker", "ClubChinesePokerRoundRecord", "JokerArchive", "ClubChinesePokerRoundRecord"},
+
+		{"Joker", "CommonChinesePokerGame", "JokerArchive", "CommonChinesePokerGame"},
+		{"Joker", "ClubChinesePokerGame", "JokerArchive", "ClubChinesePokerGame"},
+
 		{"Joker", "RouletteTransferInRecord", "JokerArchive", "RouletteTransferInRecord"},
 		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},
 
 		{"Joker", "OnlineRecord", "JokerArchive", "OnlineRecord"},
 		{"Joker", "ClubOperateLog", "JokerArchive", "ClubOperateLog"},
+		{"Joker", "GoldReportSummary", "JokerArchive", "GoldReportSummary"},
 	}
 
 	archiveTimeSpec := "0 0 * * *"
 	var archiveDaysBefore uint = 60
 
-	// for _, config := range configs {
-	// 	srcSchema, srcTable := config.srcSchema, config.srcTable
-	// 	destSchema, destTable := config.destSchema, config.destTable
-	// 	archiveStaleData(srcSchema, srcTable, destSchema, destTable, archiveDaysBefore)
-	// }
+	// Run archiver on startup (simply for checking whether it will work)
+	for _, config := range configs {
+		srcSchema, srcTable := config.srcSchema, config.srcTable
+		destSchema, destTable := config.destSchema, config.destTable
+		archiveStaleData(srcSchema, srcTable, destSchema, destTable, archiveDaysBefore)
+	}
 
 	job.AddFunc(archiveTimeSpec, func() {
 		for _, config := range configs {
