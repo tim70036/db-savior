@@ -47,13 +47,20 @@ func main() {
 		{"Joker", "MarbleRecord", "JokerArchive", "MarbleRecord"},
 		{"Joker", "ItemPurchaseRecord", "JokerArchive", "ItemPurchaseRecord"},
 		{"Joker", "BundlePurchaseRecord", "JokerArchive", "BundlePurchaseRecord"},
+		{"Joker", "GachaRecord", "JokerArchive", "GachaRecord"},
+		{"Joker", "ItemExchangeRecord", "JokerArchive", "ItemExchangeRecord"},
+		{"Joker", "AchievementShopPurchaseRecord", "JokerArchive", "AchievementShopPurchaseRecord"},
+		{"Joker", "CarnivalShopPurchaseRecord", "JokerArchive", "CarnivalShopPurchaseRecord"},
 
+		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
 		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
+		{"Joker", "BuddyDualMahjongGame", "JokerArchive", "BuddyDualMahjongGame"},
+
+		{"Joker", "CommonMahjongGame", "JokerArchive", "CommonMahjongGame"},
 		{"Joker", "ClubMahjongGame", "JokerArchive", "ClubMahjongGame"},
 		{"Joker", "BuddyMahjongGame", "JokerArchive", "BuddyMahjongGame"},
-		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
-		{"Joker", "CommonMahjongGame", "JokerArchive", "CommonMahjongGame"},
 		{"Joker", "RankMahjongGame", "JokerArchive", "RankMahjongGame"},
+		{"Joker", "CarnivalMahjongGame", "JokerArchive", "CarnivalMahjongGame"},
 		{"Joker", "MissionGame", "JokerArchive", "MissionGame"},
 
 		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
@@ -69,9 +76,11 @@ func main() {
 
 		{"Joker", "CommonChinesePokerRoundRecord", "JokerArchive", "CommonChinesePokerRoundRecord"},
 		{"Joker", "ClubChinesePokerRoundRecord", "JokerArchive", "ClubChinesePokerRoundRecord"},
+		{"Joker", "BuddyChinesePokerRoundRecord", "JokerArchive", "BuddyChinesePokerRoundRecord"},
 
 		{"Joker", "CommonChinesePokerGame", "JokerArchive", "CommonChinesePokerGame"},
 		{"Joker", "ClubChinesePokerGame", "JokerArchive", "ClubChinesePokerGame"},
+		{"Joker", "BuddyChinesePokerGame", "JokerArchive", "BuddyChinesePokerGame"},
 
 		{"Joker", "RouletteTransferInRecord", "JokerArchive", "RouletteTransferInRecord"},
 		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},
