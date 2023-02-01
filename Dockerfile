@@ -35,4 +35,4 @@ RUN set -x \
 
 COPY --from=build /app/build/db-savior /db-savior
 RUN ls -al
-CMD ["/db-savior"]
+ENTRYPOINT ["/db-savior"]
