@@ -37,6 +37,7 @@ func main() {
 		{"Joker", "RichManScoreBoard", "JokerArchive", "RichManScoreBoard"},
 		{"Joker", "WinRateScoreBoard", "JokerArchive", "WinRateScoreBoard"},
 		{"Joker", "ClubCashScoreboard", "JokerArchive", "ClubCashScoreboard"},
+		{"Joker", "MissionGameScoreBoard", "JokerArchive", "MissionGameScoreBoard"},
 
 		{"Joker", "CashRecord", "JokerArchive", "CashRecord"},
 		{"Joker", "RankRecord", "JokerArchive", "RankRecord"},
