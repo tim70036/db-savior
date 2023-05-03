@@ -1,7 +1,7 @@
 ##
 ## Build
 ##
-FROM golang:1.18-alpine3.15 AS build
+FROM golang:1.20-alpine3.17 AS build
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ RUN go build -o ./build/db-savior
 ##
 ## Deploy
 ##
-FROM alpine:3.15
+FROM alpine:3.17
 WORKDIR /
 
 ENV PERCONA_TOOLKIT_VERSION 3.3.1
