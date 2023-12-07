@@ -70,7 +70,9 @@ func main() {
 		{"Joker", "BuddyYablonBet", "JokerArchive", "BuddyYablonBet"},
 		{"Joker", "CommonYablonBet", "JokerArchive", "CommonYablonBet"},
 		{"Joker", "ClubYablonBet", "JokerArchive", "ClubYablonBet"},
+		{"Joker", "BuddyTexasPokerBet", "JokerArchive", "BuddyTexasPokerBet"},
 		{"Joker", "CommonTexasPokerBet", "JokerArchive", "CommonTexasPokerBet"},
+		{"Joker", "ClubTexasPokerBet", "JokerArchive", "ClubTexasPokerBet"},
 
 		{"Joker", "BuddyYablonGame", "JokerArchive", "BuddyYablonGame"},
 		{"Joker", "CommonYablonGame", "JokerArchive", "CommonYablonGame"},
@@ -83,7 +85,9 @@ func main() {
 		{"Joker", "CommonChinesePokerGame", "JokerArchive", "CommonChinesePokerGame"},
 		{"Joker", "ClubChinesePokerGame", "JokerArchive", "ClubChinesePokerGame"},
 		{"Joker", "BuddyChinesePokerGame", "JokerArchive", "BuddyChinesePokerGame"},
+		{"Joker", "BuddyTexasPokerGame", "JokerArchive", "BuddyTexasPokerGame"},
 		{"Joker", "CommonTexasPokerGame", "JokerArchive", "CommonTexasPokerGame"},
+		{"Joker", "ClubTexasPokerGame", "JokerArchive", "ClubTexasPokerGame"},
 
 		{"Joker", "RouletteTransferInRecord", "JokerArchive", "RouletteTransferInRecord"},
 		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},

@@ -1,0 +1,52 @@
+USE JokerArchive;
+
+CREATE TABLE `JokerArchive`.`ClubTexasPokerGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `communityCards` VARCHAR(255) NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `clubId` CHAR(36) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`ClubTexasPokerBet` (
+  `gameId` CHAR(36) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
+  `profit` INT NOT NULL,
+  `betAmount` INT NOT NULL,
+  `water` INT NOT NULL,
+  `jackpotWater` INT NOT NULL,
+  `cards` VARCHAR(255) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`, `uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`BuddyTexasPokerGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `communityCards` VARCHAR(255) NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`BuddyTexasPokerBet` (
+  `gameId` CHAR(36) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
+  `profit` INT NOT NULL,
+  `betAmount` INT NOT NULL,
+  `water` INT NOT NULL,
+  `jackpotWater` INT NOT NULL,
+  `cards` VARCHAR(255) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`, `uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
