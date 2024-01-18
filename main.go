@@ -20,6 +20,9 @@ type ArchiveConfig []struct {
 	destTable  string
 }
 
+// EventItemReceiveRecord may be a long term event
+// Create archive table, but no move record now
+
 func main() {
 	initDatabase()
 	defer db.Close()
@@ -52,6 +55,7 @@ func main() {
 		{"Joker", "ItemExchangeRecord", "JokerArchive", "ItemExchangeRecord"},
 		{"Joker", "AchievementShopPurchaseRecord", "JokerArchive", "AchievementShopPurchaseRecord"},
 		{"Joker", "CarnivalShopPurchaseRecord", "JokerArchive", "CarnivalShopPurchaseRecord"},
+		{"Joker", "ItemConsumeRecord", "JokerArchive", "ItemConsumeRecord"},
 
 		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
 		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
@@ -63,9 +67,14 @@ func main() {
 		{"Joker", "RankMahjongGame", "JokerArchive", "RankMahjongGame"},
 		{"Joker", "CarnivalMahjongGame", "JokerArchive", "CarnivalMahjongGame"},
 		{"Joker", "MissionGame", "JokerArchive", "MissionGame"},
+		{"Joker", "NewCommonMahjongGame", "JokerArchive", "NewCommonMahjongGame"},
+		{"Joker", "NewBuddyMahjongGame", "JokerArchive", "NewBuddyMahjongGame"},
+		{"Joker", "NewCarnivalMahjongGame", "JokerArchive", "NewCarnivalMahjongGame"},
+		{"Joker", "NewRankMahjongGame", "JokerArchive", "NewRankMahjongGame"},
 
 		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
 		{"Joker", "MahjongRoundRecord", "JokerArchive", "MahjongRoundRecord"},
+		{"Joker", "NewMahjongRoundRecord", "JokerArchive", "NewMahjongRoundRecord"},
 
 		{"Joker", "BuddyYablonBet", "JokerArchive", "BuddyYablonBet"},
 		{"Joker", "CommonYablonBet", "JokerArchive", "CommonYablonBet"},

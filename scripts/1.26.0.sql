@@ -1,0 +1,117 @@
+USE JokerArchive;
+
+CREATE TABLE `JokerArchive`.`NewCommonMahjongGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `state` INT UNSIGNED NOT NULL,
+  `player1` CHAR(36) NOT NULL,
+  `player2` CHAR(36) NOT NULL,
+  `player3` CHAR(36) NOT NULL,
+  `player4` CHAR(36) NOT NULL,
+  `scores` MEDIUMTEXT NOT NULL,
+  `startTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `round` INT NOT NULL,
+  `bankerWind` INT NOT NULL,
+  `prevailWind` INT NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`NewBuddyMahjongGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `state` INT UNSIGNED NOT NULL,
+  `player1` CHAR(36) NOT NULL,
+  `player2` CHAR(36) NOT NULL,
+  `player3` CHAR(36) NOT NULL,
+  `player4` CHAR(36) NOT NULL,
+  `scores` MEDIUMTEXT NOT NULL,
+  `startTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `round` INT NOT NULL,
+  `bankerWind` INT NOT NULL,
+  `prevailWind` INT NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`NewCarnivalMahjongGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `state` INT UNSIGNED NOT NULL,
+  `player1` CHAR(36) NOT NULL,
+  `player2` CHAR(36) NOT NULL,
+  `player3` CHAR(36) NOT NULL,
+  `player4` CHAR(36) NOT NULL,
+  `scores` MEDIUMTEXT NOT NULL,
+  `startTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `round` INT NOT NULL,
+  `bankerWind` INT NOT NULL,
+  `prevailWind` INT NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `JokerArchive`.`NewRankMahjongGame` (
+  `gameId` CHAR(36) NOT NULL,
+  `roomId` CHAR(36) NOT NULL,
+  `state` INT UNSIGNED NOT NULL,
+  `player1` CHAR(36) NOT NULL,
+  `player2` CHAR(36) NOT NULL,
+  `player3` CHAR(36) NOT NULL,
+  `player4` CHAR(36) NOT NULL,
+  `scores` MEDIUMTEXT NOT NULL,
+  `startTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `endTime` DATETIME NOT NULL DEFAULT '2037-01-01 00:00:00',
+  `round` INT NOT NULL,
+  `bankerWind` INT NOT NULL,
+  `prevailWind` INT NOT NULL,
+  `gameMetaUid` CHAR(36) NOT NULL,
+  `gameSetting` TEXT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`NewMahjongRoundRecord` (
+  `gameId` CHAR(36) NOT NULL,
+  `round` INT UNSIGNED NOT NULL,
+  `bankerWind` INT UNSIGNED NOT NULL,
+  `prevailWind` INT UNSIGNED NOT NULL,
+  `scores` TEXT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`gameId`, `round`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `JokerArchive`.`EventItemReceiveRecord` (
+  `eventId` VARCHAR(255) NOT NULL,
+  `uid` CHAR(36) NOT NULL,
+  `itemId` INT NOT NULL,
+  `amount` INT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`eventId`, `uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `JokerArchive`.`ItemConsumeRecord` (
+  `itemConsumeRecordId` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid` CHAR(36) NOT NULL,
+  `itemId` INT NOT NULL,
+  `amount` INT NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`itemConsumeRecordId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
