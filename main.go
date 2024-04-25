@@ -73,6 +73,7 @@ func main() {
 		{"Joker", "NewRankMahjongGame", "JokerArchive", "NewRankMahjongGame"},
 		{"Joker", "NewQualifierMahjongGame", "JokerArchive", "NewQualifierMahjongGame"},
 		{"Joker", "NewEliminationMahjongGame", "JokerArchive", "NewEliminationMahjongGame"},
+		{"Joker", "NewClubMahjongGame", "JokerArchive", "NewClubMahjongGame"},
 
 		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
 		{"Joker", "MahjongRoundRecord", "JokerArchive", "MahjongRoundRecord"},
