@@ -109,6 +109,13 @@ func main() {
 		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},
 		{"Joker", "TexasPokerJackpotTransferOutRecord", "JokerArchive", "TexasPokerJackpotTransferOutRecord"},
 
+		{"Joker", "PiggyBankCoinRecord", "JokerArchive", "PiggyBankCoinRecord"},
+		{"Joker", "CampaignPrizeRecord", "JokerArchive", "CampaignPrizeRecord"},
+		{"Joker", "CampaignMissionRecord", "JokerArchive", "CampaignMissionRecord"},
+		{"Joker", "UserPointRecord", "JokerArchive", "UserPointRecord"},
+		{"Joker", "PointShopRecord", "JokerArchive", "PointShopRecord"},
+		{"Joker", "NameChangedRecord", "JokerArchive", "NameChangedRecord"},
+
 		{"Joker", "OnlineRecord", "JokerArchive", "OnlineRecord"},
 		{"Joker", "ClubOperateLog", "JokerArchive", "ClubOperateLog"},
 		{"Joker", "GoldReportSummary", "JokerArchive", "GoldReportSummary"},
