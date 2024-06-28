@@ -56,6 +56,7 @@ func main() {
 		{"Joker", "AchievementShopPurchaseRecord", "JokerArchive", "AchievementShopPurchaseRecord"},
 		{"Joker", "CarnivalShopPurchaseRecord", "JokerArchive", "CarnivalShopPurchaseRecord"},
 		{"Joker", "ItemConsumeRecord", "JokerArchive", "ItemConsumeRecord"},
+		{"Joker", "CurrencyRecord", "JokerArchive", "CurrencyRecord"},
 
 		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
 		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
@@ -74,10 +75,14 @@ func main() {
 		{"Joker", "NewQualifierMahjongGame", "JokerArchive", "NewQualifierMahjongGame"},
 		{"Joker", "NewEliminationMahjongGame", "JokerArchive", "NewEliminationMahjongGame"},
 		{"Joker", "NewClubMahjongGame", "JokerArchive", "NewClubMahjongGame"},
+		{"Joker", "BuddyHorseRaceMahjongGame", "JokerArchive", "BuddyHorseRaceMahjongGame"},
+		{"Joker", "CommonHorseRaceMahjongGame", "JokerArchive", "CommonHorseRaceMahjongGame"},
+		{"Joker", "ClubHorseRaceMahjongGame", "JokerArchive", "ClubHorseRaceMahjongGame"},
 
 		{"Joker", "DualMahjongRoundRecord", "JokerArchive", "DualMahjongRoundRecord"},
 		{"Joker", "MahjongRoundRecord", "JokerArchive", "MahjongRoundRecord"},
 		{"Joker", "NewMahjongRoundRecord", "JokerArchive", "NewMahjongRoundRecord"},
+		{"Joker", "HorseRaceMahjongRoundRecord", "JokerArchive", "HorseRaceMahjongRoundRecord"},
 
 		{"Joker", "BuddyYablonBet", "JokerArchive", "BuddyYablonBet"},
 		{"Joker", "CommonYablonBet", "JokerArchive", "CommonYablonBet"},
@@ -115,6 +120,8 @@ func main() {
 		{"Joker", "UserPointRecord", "JokerArchive", "UserPointRecord"},
 		{"Joker", "PointShopRecord", "JokerArchive", "PointShopRecord"},
 		{"Joker", "NameChangedRecord", "JokerArchive", "NameChangedRecord"},
+		{"Joker", "MoonCardMissionRecord", "JokerArchive", "MoonCardMissionRecord"},
+		{"Joker", "PrizeRecord", "JokerArchive", "PrizeRecord"},
 
 		{"Joker", "OnlineRecord", "JokerArchive", "OnlineRecord"},
 		{"Joker", "ClubOperateLog", "JokerArchive", "ClubOperateLog"},
