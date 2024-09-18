@@ -58,6 +58,8 @@ func main() {
 		{"Joker", "CarnivalShopPurchaseRecord", "JokerArchive", "CarnivalShopPurchaseRecord"},
 		{"Joker", "ItemConsumeRecord", "JokerArchive", "ItemConsumeRecord"},
 		{"Joker", "CurrencyRecord", "JokerArchive", "CurrencyRecord"},
+		{"Joker", "VipExpRecord", "JokerArchive", "VipExpRecord"},
+		{"Joker", "VipMissionRecord", "JokerArchive", "VipMissionRecord"},
 
 		{"Joker", "CommonDualMahjongGame", "JokerArchive", "CommonDualMahjongGame"},
 		{"Joker", "ClubDualMahjongGame", "JokerArchive", "ClubDualMahjongGame"},
@@ -91,6 +93,7 @@ func main() {
 		{"Joker", "BuddyTexasPokerBet", "JokerArchive", "BuddyTexasPokerBet"},
 		{"Joker", "CommonTexasPokerBet", "JokerArchive", "CommonTexasPokerBet"},
 		{"Joker", "ClubTexasPokerBet", "JokerArchive", "ClubTexasPokerBet"},
+		{"Joker", "CommonZoomTexasPokerBet", "JokerArchive", "CommonZoomTexasPokerBet"},
 
 		{"Joker", "BuddyYablonGame", "JokerArchive", "BuddyYablonGame"},
 		{"Joker", "CommonYablonGame", "JokerArchive", "CommonYablonGame"},
@@ -101,6 +104,8 @@ func main() {
 		{"Joker", "BuddyChinesePokerRoundRecord", "JokerArchive", "BuddyChinesePokerRoundRecord"},
 		{"Joker", "CommonDarkChessRoundRecord", "JokerArchive", "CommonDarkChessRoundRecord"},
 		{"Joker", "BuddyDarkChessRoundRecord", "JokerArchive", "BuddyDarkChessRoundRecord"},
+		{"Joker", "QualifierChinesePokerRoundRecord", "JokerArchive", "QualifierChinesePokerRoundRecord"},
+		{"Joker", "EliminationChinesePokerRoundRecord", "JokerArchive", "EliminationChinesePokerRoundRecord"},
 
 		{"Joker", "CommonChinesePokerGame", "JokerArchive", "CommonChinesePokerGame"},
 		{"Joker", "ClubChinesePokerGame", "JokerArchive", "ClubChinesePokerGame"},
@@ -110,6 +115,9 @@ func main() {
 		{"Joker", "BuddyTexasPokerGame", "JokerArchive", "BuddyTexasPokerGame"},
 		{"Joker", "CommonTexasPokerGame", "JokerArchive", "CommonTexasPokerGame"},
 		{"Joker", "ClubTexasPokerGame", "JokerArchive", "ClubTexasPokerGame"},
+		{"Joker", "CommonZoomTexasPokerGame", "JokerArchive", "CommonZoomTexasPokerGame"},
+		{"Joker", "QualifierChinesePokerGame", "JokerArchive", "QualifierChinesePokerGame"},
+		{"Joker", "EliminationChinesePokerGame", "JokerArchive", "EliminationChinesePokerGame"},
 
 		{"Joker", "RouletteTransferInRecord", "JokerArchive", "RouletteTransferInRecord"},
 		{"Joker", "RouletteTransferOutRecord", "JokerArchive", "RouletteTransferOutRecord"},
