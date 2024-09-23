@@ -33,3 +33,6 @@ benchmarks/graphs
 
 # Typescript
 build/**/*
+
+# IntelliJ
+.idea

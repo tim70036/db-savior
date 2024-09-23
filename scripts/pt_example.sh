@@ -8,10 +8,10 @@ echo ${DB_PWD:?err}
 
 
 # Kill sleep connections and log the sql history of that connection.
-# Very beatiful, very powerful.
+# Very beautiful, very powerful.
 # --match-user: we should only kill connections that comes from our application server.
 # Be careful not to kill important connection such as things related to replication or aws rds management.
-# --wait-before-kill: give our node js logger the chance to retreive connection history before killing it.
+# --wait-before-kill: give our node js logger the chance to retrieve connection history before killing it.
 # But don't wait for too long since pt-kill will not move before killing process.
 pt-kill --host ${DB_HOST:?err} \
 --user ${DB_USER:?err} --password ${DB_PWD:?err} \
